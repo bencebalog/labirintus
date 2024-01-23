@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labirintus</title>
+    <style>
+        body{
+            background-color: darkslategrey;
+        }
+        #jatek{
+            background-color: white;
+            border: 5px solid lightgrey;
+            width: 992px; height: 672px;
+            padding: 10px;
+            margin: 0px auto;
+            font-size: 0pt;
+        }
+    </style>
+
+    <script>
+
+        function start(){
+            let html="";
+            for( let s=0;s<21;s++){
+                for(let o=0;o<31;o++){
+                    html+="<img src='icons/wall.png'>"
+                }
+            }
+            document.getElementById("jatek").innerHTML=html;
+        }
+
+
+
+    </script>
+</head>
+<body onload="start()">
+    <div id="jatek"></div>
+</body>
+</html>
