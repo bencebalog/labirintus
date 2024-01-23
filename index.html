@@ -20,14 +20,61 @@
 
     <script>
 
+        let t =[];
+
         function start(){
             let html="";
             for( let s=0;s<21;s++){
+                t[s]=[];
                 for(let o=0;o<31;o++){
-                    html+="<img src='icons/wall.png'>"
+                    t[s][o] ="wall";
+                    html+="<img id='"+s+"x"+o+"' src='icons/wall.png'>"
                 }
             }
             document.getElementById("jatek").innerHTML=html;
+            gondol();
+        }
+
+        function gondol(){
+            let o=0,s=0;
+            let sor=[]
+            let osz=[]
+            for(s=1;s<20;s++){
+                for(o=1;o<30;o++){
+                    setKep(s,o,"null")
+                }
+            }
+            while(sor.length +osz.length < 23){
+                if(Math.random() > 0.5 && sor.length < 9){
+                    do{
+                        s = Math.floor(Math.random()*9+1)*2
+                        console.log("s"+s);
+                    }while(sor.includes(s));
+                    sor.push(s);
+                    if(Math.random() > 0.5){
+                        for(o=1;o<30;o++) if(t[s][o+1] != "wall") setKep(s,o,"wall")
+                    }else{
+                        for(o=29;o>0;o--) if(t[s][o-1] != "wall") setKep(s,o,"wall")
+                    }
+                }else if(osz.length<14){
+                    do{
+                        o=Math.floor(Math.random()*14+1)*2;
+                        console.log("o"+o);
+                    }while(osz.includes(o))
+                    osz.push(o);
+                    if(Math.random() > 0.5){
+                        for(s=1;s<20;s++) if(t[s+1][o] != "wall") setKep(s,o,"wall")
+                    }else{
+                        for(s=19;s>0;s--) if(t[s-1][o] != "wall") setKep(s,o,"wall")
+                        
+                    }
+                }
+            }
+        }
+
+        function setKep(s,o,kep){
+            document.getElementById(s+"x"+o).src = "icons/"+kep+".png"
+            t[s][o] = kep
         }
 
 
